@@ -1,6 +1,8 @@
 package com.clone.love8.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -148,7 +150,10 @@ private fun AddSpecialDayDialog(
         onDismissRequest = onDismiss,
         title = { Text("Thêm ngày đặc biệt") },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it.take(60) },

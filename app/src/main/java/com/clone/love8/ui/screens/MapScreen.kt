@@ -212,12 +212,9 @@ private fun OsmMap(data: AppData, hasPermission: Boolean) {
         }
         if (hasPermission && lm != null) {
             LocationHelper.lastKnown(ctx)?.let { liveLocation = it }
-            runCatching {
-                lm.getProviders(true).forEach { provider ->
-                    if (provider != LocationManager.PASSIVE_PROVIDER) {
-                        lm.requestLocationUpdates(provider, 5_000L, 5f, listener, Looper.getMainLooper())
-                    }
-                }
+            val providers = runCatching { lm.getProviders(true) }.getOrDefault(emptyList())
+            providers.filter { it != LocationManager.PASSIVE_PROVIDER }.forEach { provider ->
+                runCatching { lm.requestLocationUpdates(provider, 5_000L, 5f, listener, Looper.getMainLooper()) }
             }
         }
         onDispose {

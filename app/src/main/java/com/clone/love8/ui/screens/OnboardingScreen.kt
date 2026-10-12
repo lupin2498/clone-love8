@@ -73,7 +73,7 @@ fun OnboardingScreen() {
                 Modifier
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
-                    .padding(24.dp),
+                    .padding(horizontal = 16.dp, vertical = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
@@ -130,7 +130,7 @@ fun OnboardingScreen() {
                             title = null,
                             showModeToggle = true,
                             colors = DatePickerDefaults.colors(containerColor = Color.Transparent),
-                            modifier = Modifier.clip(RoundedCornerShape(20.dp)).background(Color.White),
+                            modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(20.dp)).background(Color.White),
                         )
                         PrimaryButton("Hoàn tất 🎉", enabled = dateState.selectedDateMillis != null) {
                             val millis = dateState.selectedDateMillis ?: todayMillis
