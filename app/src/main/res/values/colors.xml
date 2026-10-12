@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="love_pink">#FF5C8A</color>
+    <color name="love_pink_dark">#E0436F</color>
+    <color name="love_pink_light">#FFD6E2</color>
+    <color name="love_cream">#FFF6F8</color>
+    <color name="white">#FFFFFF</color>
+    <color name="ic_launcher_background">#FF6F96</color>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Love8 Clone</string>
+    <string name="widget_days_label">Love8 · Ngày yêu nhau</string>
+    <string name="widget_days_desc">Đếm số ngày hai bạn đã bên nhau</string>
+    <string name="widget_pet_label">Love8 · Thú cưng</string>
+    <string name="widget_pet_desc">Thú cưng chung của hai bạn</string>
+    <string name="widget_partner_label">Love8 · Người ấy</string>
+    <string name="widget_partner_desc">Pin, khoảng cách và tâm trạng của người ấy</string>
+</resources>
