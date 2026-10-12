@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -224,6 +226,9 @@ fun SubPage(
         snackbarHost = { if (snackbarHostState != null) SnackbarHost(snackbarHostState) },
         floatingActionButton = floatingActionButton,
         containerColor = LoveCream,
-        content = content,
-    )
+    ) { inner ->
+        Box(Modifier.fillMaxSize().consumeWindowInsets(inner).imePadding()) {
+            content(inner)
+        }
+    }
 }

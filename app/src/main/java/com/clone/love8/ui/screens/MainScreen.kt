@@ -6,7 +6,9 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -132,7 +134,7 @@ fun MainScreen(data: AppData) {
             }
         },
     ) { inner ->
-        Box(Modifier.fillMaxSize().padding(inner)) {
+        Box(Modifier.fillMaxSize().padding(inner).consumeWindowInsets(inner).imePadding()) {
             when (tab) {
                 Tab.HOME -> HomeScreen(data, showMessage, open)
                 Tab.MAP -> MapScreen(data, showMessage, open)

@@ -1,15 +1,11 @@
 package com.clone.love8.ui.screens
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -173,6 +169,8 @@ private fun PetStage(pet: PetState, hearts: Int, onTap: () -> Unit, onEdit: () -
         label = "bounce",
     )
     var showHeart by remember { mutableStateOf(false) }
+    val heartAlpha by animateFloatAsState(if (showHeart) 1f else 0f, tween(250), label = "heartAlpha")
+    val heartOffset by animateFloatAsState(if (showHeart) -36f else 10f, tween(600), label = "heartOffset")
     LaunchedEffect(hearts) {
         if (hearts > 0) {
             showHeart = true
@@ -216,14 +214,16 @@ private fun PetStage(pet: PetState, hearts: Int, onTap: () -> Unit, onEdit: () -
                 if (pet.sleeping) {
                     Text("💤", fontSize = 36.sp, modifier = Modifier.align(Alignment.TopEnd))
                 }
-                AnimatedVisibility(
-                    visible = showHeart,
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    enter = fadeIn() + slideInVertically { it },
-                    exit = fadeOut() + slideOutVertically { -it },
-                ) {
-                    Text("💕", fontSize = 40.sp)
-                }
+                Text(
+                    "💕",
+                    fontSize = 40.sp,
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .graphicsLayer {
+                            alpha = heartAlpha
+                            translationY = heartOffset * density
+                        },
+                )
             }
             Text("Chạm vào bé để vuốt ve 💕", style = MaterialTheme.typography.labelMedium, color = LoveSubText)
         }
