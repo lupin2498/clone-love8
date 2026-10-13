@@ -1,0 +1,92 @@
+name: Love8Clone
+options:
+  bundleIdPrefix: com.clone
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Manual
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  Love8Clone:
+    type: application
+    platform: iOS
+    sources:
+      - path: Love8Clone
+      - path: Shared
+    info:
+      path: Love8Clone/Info.plist
+      properties:
+        CFBundleDisplayName: Love8 Clone
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        NSLocationWhenInUseUsageDescription: Love8 Clone dùng vị trí để chia sẻ với người ấy và tính khoảng cách giữa hai bạn.
+        NSLocationAlwaysAndWhenInUseUsageDescription: Cho phép vị trí nền để người ấy luôn thấy vị trí mới nhất của bạn.
+        NSPhotoLibraryUsageDescription: Chọn ảnh làm ảnh đại diện.
+        UIBackgroundModes:
+          - fetch
+        BGTaskSchedulerPermittedIdentifiers:
+          - com.clone.love8.refresh
+        ITSAppUsesNonExemptEncryption: false
+    entitlements:
+      path: Love8Clone/Love8Clone.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.clone.love8
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.clone.love8
+        PRODUCT_NAME: Love8Clone
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: NO
+    dependencies:
+      - target: Love8Widget
+        embed: true
+  Love8Widget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Love8Widget
+      - path: Shared
+    info:
+      path: Love8Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Love8 Clone
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Love8Widget/Love8Widget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.clone.love8
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.clone.love8.widget
+        PRODUCT_NAME: Love8Widget
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES
+schemes:
+  Love8Clone:
+    build:
+      targets:
+        Love8Clone: all
+        Love8Widget: all
+    run:
+      config: Debug
+    archive:
+      config: Release

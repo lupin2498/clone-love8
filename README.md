@@ -1,6 +1,6 @@
 # Love8 Clone 💗
 
-Bản clone của ứng dụng **Love8 – App for Couples** (Google Play: `ltd.love8.couples.relationship`) viết bằng Kotlin + Jetpack Compose.
+Bản clone của ứng dụng **Love8 – App for Couples** (Google Play: `ltd.love8.couples.relationship`): bản Android viết bằng Kotlin + Jetpack Compose (thư mục `app/`), bản iOS viết bằng SwiftUI (thư mục `ios/`).
 
 ## Tính năng
 
@@ -21,11 +21,36 @@ Widget màn hình chính: **Ngày yêu nhau**, **Thú cưng**, **Người ấy**
 
 Dữ liệu (pin, vị trí, lời nhắn, thú cưng, ngày đặc biệt, nhật ký) được đồng bộ qua máy chủ [ntfy](https://ntfy.sh) và **mã hóa đầu-cuối AES-256-GCM** bằng khóa sinh từ mã kết nối. Có thể đổi sang máy chủ ntfy tự host trong màn hình kết nối.
 
-## Tải APK
+## Tải bộ cài
 
-APK được build tự động bằng GitHub Actions (`.github/workflows/build-apk.yml`) mỗi lần push và đăng ở mục **Releases** của repo.
+- **Android (APK):** build bằng `.github/workflows/build-apk.yml`, đăng ở **Releases** (tag `v1.0.x`).
+- **iOS (IPA):** build bằng `.github/workflows/build-ios.yml`, đăng ở **Releases** (tag `ios-v1.0.x`).
+
+### Cài IPA lên iPhone
+
+IPA chưa được ký bằng chứng chỉ Apple, cần cài qua công cụ sideload:
+
+- **Sideloadly** (Windows/macOS): cắm iPhone → kéo file `.ipa` vào → đăng nhập Apple ID → Start. Sau đó vào *Cài đặt → Cài đặt chung → Quản lý VPN & thiết bị* để tin cậy nhà phát triển.
+- **AltStore**: mở AltStore trên iPhone → *My Apps* → `+` → chọn file `.ipa`.
+- **TrollStore** (máy hỗ trợ): mở file `.ipa` bằng TrollStore.
+
+Với Apple ID miễn phí, app cần được ký lại sau mỗi 7 ngày (AltStore/Sideloadly tự làm khi bật refresh).
+
+Bản iOS dùng chung giao thức đồng bộ với bản Android: iPhone và Android có thể kết nối với nhau bằng cùng một mã.
 
 ## Build thủ công
+
+### iOS
+
+Yêu cầu macOS + Xcode 15 trở lên và [XcodeGen](https://github.com/yonaskolb/XcodeGen):
+
+```bash
+cd ios
+xcodegen generate
+open Love8Clone.xcodeproj   # chọn Team để ký và chạy trên máy thật
+```
+
+### Android
 
 Yêu cầu JDK 17 và Android SDK (compileSdk 35):
 

@@ -1,0 +1,7 @@
+*.xcodeproj/
+build/
+out/
+build.log
+Love8Clone/Info.plist
+Love8Widget/Info.plist
+*.entitlements
